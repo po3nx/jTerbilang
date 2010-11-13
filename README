@@ -1,0 +1,10 @@
+jTerbilang is jQuery plugin used to convert a number format into word in indonesian, (jTerbilang adalah plugin jQuery yang digunakan untuk mengubah angka menjadi terbilang dalam format Bahasa Indonesia)
+
+Features:
+- 4 type styles 1= UPPER CASE,2=lower case,3=Title Case, 4=Sentence case
+- Allow put prefix and postfix to output
+- Allow input from text or form
+- Allow show output to specified HTML element
+
+to try demo sample please visit : http://po3nx.web.id/jterbilang
+jTerbilang also at jQuery plugins web : http://plugins.jquery.com/project/jTerbilang
