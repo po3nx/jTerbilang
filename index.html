@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head>
+	<title>jTerbilang ( Plugin Terbilang JQuery Javascript Library )</title>
+	<style> 
+		.terbilang,.divborder {display: block;margin: 15px 0;background-repeat: repeat-x;background-position: 0 100%;clear: both; }
+		.divborder {color: #6C56B6;background-color: #FAFDF9;border-bottom: 1px solid #C1CEC1;border-right: 1px solid #C1CEC1;}
+		.terbilang {color: #D0583F;background-color: #FFFBFB;border-bottom: 1px solid #F8C9BB;border-right: 1px solid #F8C9BB;}
+	</style>
+	<script type="text/javascript" src="jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="jTerbilang.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#angka").terbilang({
+			'output_div'	:"pesan2",
+			'input_type'	:"div"
+		});
+		$("#angka").terbilang({
+			'style'			: 3, 			//style 1=UPPER CASE,2=lower case,3=Title Case,4=Sentence case
+			'input_type'	: "text", 		//input type (form or text) default value is form
+			'output_div' 	: "pesan3",		//element's id to show the output 
+			'awalan'		: "# ",			//prefix output
+			'akhiran' 		: "rupiah #",	//postfix output
+		});
+		$("#angka1").terbilang({
+			'style'			: 1, 
+			'output_div' 	: "pesan",		
+		});
+		$("#convert").click(function(){
+			$("#angka2").terbilang({
+				'style'			: parseInt($("#styles").val()),
+				'output_div' 	: "pesan4",		
+				'awalan'		: stringFilter($("#awalan").val()),
+				'akhiran' 		: stringFilter($("#akhiran").val())
+			});
+		});
+		$("#styles").change(function(){$("#convert").click();});
+		$("#awalan").keyup(function(){$("#convert").click();});
+		$("#akhiran").keyup(function(){$("#convert").click();});
+	});
+	function stringFilter (s) { //Filter the Form
+		filteredValues = "<>\"'/"; 
+		var i;
+		var returnString = "";
+		for (i = 0; i < s.length; i++) { 
+			var c = s.charAt(i);
+			if (filteredValues.indexOf(c) == -1) returnString += c;
+		}
+		return returnString;
+	}
+	</script>
+</head>
+<body>
+<div class='divborder'>
+	<br />Number To Convert : <span id="angka">12345</span>
+	<h3>Simple Div Input</h3>
+	<pre>
+$("#angka").terbilang({
+	'output_div'	: "pesan2",
+	'input_type'	: "text"
+});
+	</pre>
+	<div class='terbilang'>Terbilang : <span id="pesan2"></span></div>
+	<h3>Div input with prefix and postfix</h3>
+	<pre>
+$("#angka").terbilang({
+	'style'		: 3, 		//style 1=UPPER CASE,2=lower case,3=Title Case,4=Sentence case 
+	'input_type'	: "text", 	//input type (form or text) default value is form
+	'output_div' 	: "pesan3",	//element's id to show the output 
+	'awalan'	: "# ",		//prefix output 
+	'akhiran' 	: "rupiah #",	//postfix output
+});
+	</pre>
+	<div class='terbilang'>Terbilang : <span id="pesan3"></span></div>
+</div>
+<div class='divborder'>
+	<h3>Simple Form Input</h3>
+	<pre>
+$("#angka1").terbilang({
+	'style'		: 1, 
+	'output_div' 	: "pesan",		
+});
+	</pre>
+	Type Number Here : <input type='text' id='angka1'>
+	<div class='terbilang'>Terbilang : <span id="pesan"></span></div>
+</div>
+<div class='divborder'>
+	<h3>Try this Dynamic form Option</h3>
+	<pre>
+$("#convert").click(function(){
+	$("#angka2").terbilang({
+		'style'		: parseInt($("#styles").val()),
+		'output_div' 	: "pesan4",		
+		'awalan'	: $("#awalan").val(),
+		'akhiran' 	: $("#akhiran").val()
+	});
+});
+	</pre>
+	Style <select name='styles' id='styles'>
+		<option value='1'>UPER CASE</option>
+		<option value='2'>lower case</option>
+		<option value='3'>Title Case</option>
+		<option value='4'>Sentence case</option>
+	</select>
+	<br />Type Prefix : <input type='text' id='awalan' value="#">
+	<br />Type Postfix : <input type='text' id='akhiran' value="rupiah #">
+	<br />Type Number Here : <input type='text' id='angka2'> <input type="button" id="convert" value="Terbilang">
+	<div class='terbilang'>Terbilang : <span id="pesan4"></span></div>
+</div>
+</body>
+</html>
